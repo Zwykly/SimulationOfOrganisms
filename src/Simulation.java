@@ -6,7 +6,7 @@ import java.util.Random;
 public class Simulation {
 
     private IMap map;
-    private Random rnd;
+    static private Random rnd;
     private List<ICreature> creatureList;
 
     //Currently not made: private List<IObject> objectList;
@@ -29,10 +29,22 @@ public class Simulation {
     }
 
     public void runSimulation() {
+        System.out.flush();
+        System.out.println("Time: "+time+"/"+timeLimit);
         map.PrintMap(map);
+        System.out.println("Press Enter to continue");
+        try{System.in.read();}
+        catch(Exception e){}
         do{
+            time++;
             creatureList.forEach(creature -> creature.DecideAction());
-        } while(time<=timeLimit);
+            System.out.flush();
+            System.out.println("Time: "+time+"/"+timeLimit);
+            map.PrintMap(map);
+            System.out.println("Press Enter to continue");
+            try{System.in.read();}
+            catch(Exception e){}
+        } while(time<timeLimit);
     }
 
     public static void main(String[] args) {

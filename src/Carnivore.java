@@ -6,7 +6,11 @@ public class Carnivore extends Creature implements ICarnivore {
 
     @Override
     public void DecideAction() {
-
+        int roll = rnd.nextInt(2);
+        if(roll==1)
+        {
+            Move();
+        }
     }
 
     @Override

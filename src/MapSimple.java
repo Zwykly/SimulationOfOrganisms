@@ -30,7 +30,7 @@ public class MapSimple implements IMap {
 
     @Override
     public int[] GetCreaturePos(ICreature creature) {
-        return new int[0];
+        return creaturesPositions.get(creature);
     }
 
     @Override
