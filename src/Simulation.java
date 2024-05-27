@@ -21,15 +21,18 @@ public class Simulation {
         this.creatureList = creatureCreator.CreateCreatures(map);
         for(int i=0; i<creatureList.size(); i++) {
             int[] checkedpos = new int[2];
-            checkedpos[0] = rnd.nextInt(map.GetSize());
-            checkedpos[1] = rnd.nextInt(map.GetSize());
-            map.SettleCreature(creatureList.get(i), checkedpos);
+            do {
+                checkedpos[0] = rnd.nextInt(map.GetSize());
+                checkedpos[1] = rnd.nextInt(map.GetSize());
+            } while (!map.SettleCreature(creatureList.get(i), checkedpos));
         }
-        map.PrintMap(map);
     }
 
     public void runSimulation() {
-        System.out.println();
+        map.PrintMap(map);
+        do{
+            creatureList.forEach(creature -> creature.DecideAction());
+        } while(time<=timeLimit);
     }
 
     public static void main(String[] args) {

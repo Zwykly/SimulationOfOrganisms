@@ -46,6 +46,17 @@ public class MapSimple implements IMap {
     @Override
     public void PrintMap(IMap map)
     {
-        System.out.println(creaturesPositions);
+        char[][] visableMap = new char[size][size];
+        for(int i = 0; i<size;i++)
+        {
+            for(int j = 0; j<size;j++) {
+                visableMap[i][j] = '#';
+            }
+        }
+        creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visableMap[v[0]][v[1]]='C';}});
+        for(int i = 0; i<size;i++)
+        {
+            System.out.println(visableMap[i]);
+        }
     }
 }
