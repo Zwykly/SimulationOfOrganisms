@@ -4,4 +4,6 @@ public interface IMap {
     public int[] GetCreaturePos(ICreature creature);
     public IObject GetObject(int pos);
     public int[] GetObjectPos(IObject object);
+
+    void PrintMap();
 }

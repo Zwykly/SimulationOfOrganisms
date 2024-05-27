@@ -17,7 +17,7 @@ public class MapSimple implements IMap {
     public int GetSize() {
         return size;
     }
-    //Methodss to be completed and add methods for Objects
+    //Methods to be completed and add methods for Objects
     @Override
     public ICreature GetCreature(int pos) {
         return creatures[pos];
@@ -25,7 +25,13 @@ public class MapSimple implements IMap {
 
     @Override
     public boolean SettleCreature(ICreature creature, int[] pos) {
-        return false;
+        if (creaturesPositions.containsValue(pos)) {
+            return false;
+        }
+        creature.SetMap(this);
+        creatures[pos[0]] = creature;
+        creaturesPositions.put(creature, pos);
+        return true;
     }
 
     @Override
@@ -33,6 +39,17 @@ public class MapSimple implements IMap {
         return new int[0];
     }
 
+    @Override
+    public IObject GetObject(int pos) {
+        return null;
+    }
+
+    @Override
+    public int[] GetObjectPos(IObject object) {
+        return new int[0];
+    }
+
+    @Override
     public void PrintMap()
     {
 

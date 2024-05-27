@@ -19,11 +19,13 @@ public class Simulation {
         this.map = mapCreator.CreateMap();
         this.rnd = new Random(seed);
         this.creatureList = creatureCreator.CreateCreatures(map);
-
-        for(int i=0; i<creatureList.size(); i++)
-        {
-
+        for(int i=0; i<creatureList.size(); i++) {
+            int[] checkedpos = new int[2];
+            checkedpos[0] = rnd.nextInt(100);
+            checkedpos[1] = rnd.nextInt(100);
+            map.SettleCreature(creatureList.get(i), checkedpos);
         }
+        map.PrintMap();
     }
 
     public void runSimulation() {
@@ -34,8 +36,9 @@ public class Simulation {
         System.out.println("Main_Works"); //checking if main works
 
         MapSimpleCreator mapCreate = new MapSimpleCreator(20);
+        CreatureCreator creatureCreate = new CreatureCreator();
 
-        Simulation sim = new Simulation(mapCreate); //simulation run needs to be changed
+        Simulation sim = new Simulation(mapCreate, creatureCreate, 123, 5); //simulation run needs to be changed
 
         sim.runSimulation();
 
