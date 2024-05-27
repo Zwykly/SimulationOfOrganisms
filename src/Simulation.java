@@ -16,10 +16,14 @@ public class Simulation {
 
     public Simulation(IMapCreator mapCreator, ICreatureCreator creatureCreator, long seed, int timeLimit) {
         this.timeLimit = timeLimit;
-        this.map = mapCreator.createMap();
+        this.map = mapCreator.CreateMap();
         this.rnd = new Random(seed);
-        System.out.println("Simulation_Ran_Correctly");
-        System.out.print(FinalMap.toString());
+        this.creatureList = creatureCreator.CreateCreatures(map);
+
+        for(int i=0; i<creatureList.size(); i++)
+        {
+
+        }
     }
 
     public void runSimulation() {
