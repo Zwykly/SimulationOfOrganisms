@@ -21,8 +21,8 @@ public class Simulation {
         this.creatureList = creatureCreator.CreateCreatures(map);
         for(int i=0; i<creatureList.size(); i++) {
             int[] checkedpos = new int[2];
-            checkedpos[0] = rnd.nextInt(100);
-            checkedpos[1] = rnd.nextInt(100);
+            checkedpos[0] = rnd.nextInt(map.GetSize());
+            checkedpos[1] = rnd.nextInt(map.GetSize());
             map.SettleCreature(creatureList.get(i), checkedpos);
         }
         map.PrintMap(map);
