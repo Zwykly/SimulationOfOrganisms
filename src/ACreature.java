@@ -4,7 +4,9 @@ public abstract class ACreature implements ICreature {
         this.map = map;
     }
     @Override
-    public IMap GetMap() {return map;}
+    public IMap GetMap() {
+        return map;
+    }
     @Override
     public void SetMap(IMap map) {
         this.map = map;

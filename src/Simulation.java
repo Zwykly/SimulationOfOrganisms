@@ -25,7 +25,7 @@ public class Simulation {
             checkedpos[1] = rnd.nextInt(100);
             map.SettleCreature(creatureList.get(i), checkedpos);
         }
-        map.PrintMap();
+        map.PrintMap(map);
     }
 
     public void runSimulation() {

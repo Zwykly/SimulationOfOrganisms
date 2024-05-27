@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,8 +52,8 @@ public class MapSimple implements IMap {
     }
 
     @Override
-    public void PrintMap()
+    public void PrintMap(IMap map)
     {
-
+        System.out.println(map.toString());
     }
 }

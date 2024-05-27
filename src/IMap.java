@@ -5,5 +5,5 @@ public interface IMap {
     public IObject GetObject(int pos);
     public int[] GetObjectPos(IObject object);
 
-    void PrintMap();
+    void PrintMap(IMap map);
 }
