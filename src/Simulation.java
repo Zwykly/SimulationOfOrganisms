@@ -1,16 +1,23 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+
 public class Simulation {
 
-    public int time = 0;
-    private final int timeLimit = 5; //needs to be changed when user input is considered
+    private IMap map;
+    private Random rnd;
+    private List<ICreature> creatureList;
 
-    List<String> CreatureList = new ArrayList<String>(); //change type to ICreature
-    List<String> ObjectList = new ArrayList<String>(); //change type to IObject
+    //Currently not made: private List<IObject> objectList;
+    public int time = 1;
+    private int timeLimit; //needs to be changed when user input is considered
 
-    public Simulation(IMapCreator mapCreator) {
-        HashMap FinalMap = mapCreator.createMap();
+
+    public Simulation(IMapCreator mapCreator, ICreatureCreator creatureCreator, long seed, int timeLimit) {
+        this.timeLimit = timeLimit;
+        this.map = mapCreator.createMap();
+        this.rnd = new Random(seed);
         System.out.println("Simulation_Ran_Correctly");
         System.out.print(FinalMap.toString());
     }
@@ -22,11 +29,10 @@ public class Simulation {
     public static void main(String[] args) {
         System.out.println("Main_Works"); //checking if main works
 
-        MapSimpleCreator mapCreat = new MapSimpleCreator(20);
+        MapSimpleCreator mapCreate = new MapSimpleCreator(20);
 
-        Simulation sim = new Simulation(mapCreat); //simulation run needs to be changed
-        sim.CreatureList.add("AAA");
-        sim.CreatureList.add("BBB");
+        Simulation sim = new Simulation(mapCreate); //simulation run needs to be changed
+
         sim.runSimulation();
 
     }
