@@ -1,7 +1,8 @@
 import java.util.LinkedList;
 import java.util.List;
 
-public class CreatureCreator implements ICreatureCreator {
+public class CreatureCreator implements ICreatureCreator
+{
     protected int numCarnivores;
     protected int numOmnivores;
     protected int numHerbivores;
@@ -19,7 +20,8 @@ public class CreatureCreator implements ICreatureCreator {
     }
 
     @Override
-    public List<ICreature> CreateCreatures(IMap map) {
+    public List<ICreature> CreateCreatures(IMap map)
+    {
         List<ICreature> creatureList = new LinkedList<>();
         for(int i = 0; i<numCarnivores; i++)
         {
