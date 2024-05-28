@@ -6,7 +6,7 @@ import java.util.Random;
 public class Simulation {
 
     private IMap map;
-    private Random rnd;
+    static private Random rnd;
     private List<ICreature> creatureList;
 
     //Currently not made: private List<IObject> objectList;
@@ -21,15 +21,30 @@ public class Simulation {
         this.creatureList = creatureCreator.CreateCreatures(map);
         for(int i=0; i<creatureList.size(); i++) {
             int[] checkedpos = new int[2];
-            checkedpos[0] = rnd.nextInt(map.GetSize());
-            checkedpos[1] = rnd.nextInt(map.GetSize());
-            map.SettleCreature(creatureList.get(i), checkedpos);
+            do {
+                checkedpos[0] = rnd.nextInt(map.GetSize());
+                checkedpos[1] = rnd.nextInt(map.GetSize());
+            } while (!map.SettleCreature(creatureList.get(i), checkedpos));
         }
-        map.PrintMap(map);
     }
 
     public void runSimulation() {
-        System.out.println();
+        System.out.flush();
+        System.out.println("Time: "+time+"/"+timeLimit);
+        map.PrintMap(map);
+        System.out.println("Press Enter to continue");
+        try{System.in.read();}
+        catch(Exception e){}
+        do{
+            time++;
+            creatureList.forEach(creature -> creature.DecideAction());
+            System.out.flush();
+            System.out.println("Time: "+time+"/"+timeLimit);
+            map.PrintMap(map);
+            System.out.println("Press Enter to continue");
+            try{System.in.read();}
+            catch(Exception e){}
+        } while(time<timeLimit);
     }
 
     public static void main(String[] args) {

@@ -30,7 +30,7 @@ public class MapSimple implements IMap {
 
     @Override
     public int[] GetCreaturePos(ICreature creature) {
-        return new int[0];
+        return creaturesPositions.get(creature);
     }
 
     @Override
@@ -46,6 +46,17 @@ public class MapSimple implements IMap {
     @Override
     public void PrintMap(IMap map)
     {
-        System.out.println(creaturesPositions);
+        char[][] visibleMap = new char[size][size];
+        for(int i = 0; i<size;i++)
+        {
+            for(int j = 0; j<size;j++) {
+                visibleMap[i][j] = ' ';
+            }
+        }
+        creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';}});
+        for(int i = 0; i<size;i++)
+        {
+            System.out.println(visibleMap[i]);
+        }
     }
 }
