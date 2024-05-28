@@ -1,12 +1,14 @@
 import java.util.Random;
 
-public abstract class Creature extends ACreature implements IRandomize {
+public abstract class Creature extends ACreature implements IRandomize
+{
     protected Random rnd;
     protected static long seed = 0;
     protected int level;
     protected int lastMealTime;
 
-    public Creature(IMap map) {
+    public Creature(IMap map)
+    {
         super(map);
         rnd = new Random(seed);
         this.seed++;
@@ -15,9 +17,11 @@ public abstract class Creature extends ACreature implements IRandomize {
     }
     //Do dokonczenia funkcje
     @Override
-    public void Move() {
+    public void Move()
+    {
         int[] checkPos = map.GetCreaturePos(this);
-        do {
+        do
+        {
 
             checkPos[0] += rnd.nextInt(10)-5;
             if(checkPos[0]<0)
@@ -35,12 +39,14 @@ public abstract class Creature extends ACreature implements IRandomize {
     }
 
     @Override
-    public void Move(int[] pos) {
+    public void Move(int[] pos)
+    {
 
     }
 
     @Override
-    public void Die() {
+    public void Die()
+    {
 
     }
 
