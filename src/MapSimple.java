@@ -9,6 +9,7 @@ public class MapSimple implements IMap {
     {
         this.size = size;
         creaturesPositions = new HashMap<>();
+        objectsPositions = new HashMap<>();
     }
     @Override
     public int GetSize() {
@@ -32,12 +33,7 @@ public class MapSimple implements IMap {
 
     // Methods to be completed and add methods for Objects
     @Override
-    public int[] GetObjectPos(IObject object) {
-        return new int[0];
-    }
-
-    @Override
-    // Checks if you can put object on given space
+    // Checks if you can put Object on given space
     public boolean SettleObject(IObject object, int[] pos) {
         if(objectsPositions.containsValue(pos)) {
             return false;
@@ -45,6 +41,12 @@ public class MapSimple implements IMap {
         object.SetMap(this);
         objectsPositions.put(object, pos);
         return true;
+    }
+
+    // Method to get position of a given Object
+    @Override
+    public int[] GetObjectPos(IObject object) {
+        return objectsPositions.get(object);
     }
 
     // Prints out the map

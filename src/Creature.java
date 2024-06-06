@@ -53,7 +53,5 @@ public abstract class Creature extends ACreature implements IRandomize
     @Override
     public long GetSeed() {return seed;}
     @Override
-    public void SetSeed(long seed) {
-        this.seed = seed;
-    }
+    public void SetSeed(long seed) { this.seed = seed; }
 }

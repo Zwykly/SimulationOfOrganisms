@@ -24,9 +24,9 @@ public class ObjectCreator implements IObjectCreator {
     public List<IObject> CreateObjects(IMap map)
     {
         List<IObject> objectList = new LinkedList<>();
-        for(int i = 0; i < numRenewableFood; i++)
+        for(int i = 0; i < numBlankSpace; i++)
         {
-
+                objectList.add(new Blankspace(map));
         }
         return objectList;
     }

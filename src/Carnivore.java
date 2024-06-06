@@ -1,4 +1,5 @@
-public class Carnivore extends Creature implements ICarnivore {
+public class Carnivore extends Creature implements ICarnivore
+{
     public Carnivore(IMap map)
     {
         super(map);

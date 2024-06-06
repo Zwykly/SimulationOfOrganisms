@@ -3,8 +3,6 @@ public class Blankspace extends Object
 {
     protected Random rnd;
 
-    public Blankspace (IMap map)
-    {
-        //super(map);
-    }
+    public Blankspace (IMap map) { super(map); }
+
 }
