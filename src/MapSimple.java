@@ -72,7 +72,9 @@ public class MapSimple implements IMap {
             }
         }
         creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';}});
-        objectsPositions.forEach((k,v) -> {if(k instanceof Blankspace){visibleMap[v[0]][v[1]]='F';}});
+        objectsPositions.forEach((k,v) -> {if(k instanceof Blankspace){visibleMap[v[0]][v[1]]='B';}});
+        objectsPositions.forEach((k,v) -> {if(k instanceof OneUseFood){visibleMap[v[0]][v[1]]='F';}});
+        objectsPositions.forEach((k,v) -> {if(k instanceof RenewableFood){visibleMap[v[0]][v[1]]='R';}});
         for(int i = 0; i<size;i++)
         {
             System.out.println(visibleMap[i]);

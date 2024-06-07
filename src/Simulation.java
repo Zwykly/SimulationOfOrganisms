@@ -5,6 +5,7 @@ public class Simulation {
 
     private IMap map;
     static private Random rnd;
+
     private List<ICreature> creatureList;
     private List<IObject> objectList;
 

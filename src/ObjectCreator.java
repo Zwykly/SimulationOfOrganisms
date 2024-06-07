@@ -28,6 +28,17 @@ public class ObjectCreator implements IObjectCreator {
         {
                 objectList.add(new Blankspace(map));
         }
+
+        for(int i = 0; i < numOneUseFood; i++)
+        {
+            objectList.add(new OneUseFood(map));
+        }
+
+        for(int i = 0; i < numRenewableFood; i++)
+        {
+            objectList.add(new RenewableFood(map));
+        }
+
         return objectList;
     }
 }
