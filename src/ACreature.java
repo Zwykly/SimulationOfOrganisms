@@ -1,4 +1,5 @@
-public abstract class ACreature implements ICreature {
+public abstract class ACreature implements ICreature
+{
     protected IMap map;
     public ACreature(IMap map) {
         this.map = map;

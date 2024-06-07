@@ -1,9 +1,9 @@
-import java.util.Random;
+public class Food extends AObject
+{
+    public Food (IMap map) { super(map); }
 
-public class Food {
-    protected Random rnd;
-
-    public Food (IMap map)
+    public void getEaten(IObject object)
     {
+        map.DeleteObject(object, map.GetObjectPos(object));
     }
 }

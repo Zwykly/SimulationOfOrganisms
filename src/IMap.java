@@ -8,5 +8,7 @@ public interface IMap {
     public int[] GetObjectPos(IObject object);
     boolean SettleObject(IObject object, int[] pos);
 
+    void DeleteObject(IObject object, int[] pos);
+
     void PrintMap(IMap map);
 }

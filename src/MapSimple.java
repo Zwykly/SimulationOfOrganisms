@@ -35,12 +35,23 @@ public class MapSimple implements IMap {
     @Override
     // Checks if you can put Object on given space
     public boolean SettleObject(IObject object, int[] pos) {
-        if(objectsPositions.containsValue(pos)) {
+        if(objectsPositions.containsValue(pos))
+        {
             return false;
         }
         object.SetMap(this);
         objectsPositions.put(object, pos);
         return true;
+    }
+
+    // Deleting objects (eating food)
+    public void DeleteObject(IObject object, int[] pos)
+    {
+        if(objectsPositions.containsValue(pos))
+        {
+        object.SetMap(this);
+        objectsPositions.remove(object,pos);
+        }
     }
 
     // Method to get position of a given Object
@@ -61,6 +72,7 @@ public class MapSimple implements IMap {
             }
         }
         creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';}});
+        objectsPositions.forEach((k,v) -> {if(k instanceof Blankspace){visibleMap[v[0]][v[1]]='F';}});
         for(int i = 0; i<size;i++)
         {
             System.out.println(visibleMap[i]);

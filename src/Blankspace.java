@@ -1,5 +1,7 @@
 import java.util.Random;
-public class Blankspace extends Object
+
+// nothing can stand on it or move through it
+public class Blankspace extends AObject
 {
     protected Random rnd;
 
