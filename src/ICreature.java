@@ -1,3 +1,5 @@
+import java.util.Map;
+
 public interface ICreature {
     public void DecideAction();
     public boolean IsSameType(ICreature creature);

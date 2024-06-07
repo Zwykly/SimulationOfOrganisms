@@ -53,7 +53,7 @@ public class Simulation {
         MapSimpleCreator mapCreate = new MapSimpleCreator(20);
         CreatureCreator creatureCreate = new CreatureCreator();
 
-        Simulation sim = new Simulation(mapCreate, creatureCreate, 123, 5); //simulation run needs to be changed
+        Simulation sim = new Simulation(mapCreate, creatureCreate, 123, 7); //simulation run needs to be changed
 
         sim.runSimulation();
 

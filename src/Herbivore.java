@@ -1,5 +1,5 @@
-public class Carnivore extends Creature implements ICarnivore {
-    public Carnivore(IMap map, int mobility, int deathTimer)
+public class Herbivore extends Creature implements IHerbivore{
+    public Herbivore(IMap map, int mobility, int deathTimer)
     {
         super(map, mobility, deathTimer);
     }
@@ -20,18 +20,17 @@ public class Carnivore extends Creature implements ICarnivore {
     }
 
     @Override
-    public boolean IsNearPray() {
-        for(int)
+    public boolean IsNearFood() {
         return false;
     }
 
     @Override
-    public int[] NearestPrayPos() {
+    public int[] NearestFoodPos() {
         return new int[2];
     }
 
     @Override
-    public void EatPray(int[] pos) {
+    public void EatFood(int[] pos) {
 
     }
     @Override
