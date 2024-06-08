@@ -11,17 +11,28 @@ public class Carnivore extends Creature implements ICarnivore {
             Die();
             return;
         }
-        int[] nearestPray = NearestPrayPos();
-        if (nearestPray.length == 2)
+        int rollRange = 10;
+        ICreature nearestPray = SearchForNearestPray();
+        if (nearestPray!=null)
         {
             System.out.println("Nearest pray pos: "+nearestPray);
         }
         lastMealTime++;
-        int roll = rnd.nextInt(2);
-        if(roll==1)
+        int roll = rnd.nextInt(rollRange);
+        if (deathTimer-1==lastMealTime || deathTimer-2==lastMealTime)
         {
+            if(nearestPray!=null)
+            {
+                EatPray(nearestPray);
+            } else {
+                Move();
+            }
+        } else if(roll<10) {
             Move();
+        } else if (roll == 10) {
+
         }
+
     }
 
     @Override
@@ -47,10 +58,10 @@ public class Carnivore extends Creature implements ICarnivore {
     }
 
     @Override
-    public int[] NearestPrayPos() {
+    public ICreature SearchForNearestPray() {
         int[] currentPos = map.GetCreaturePos(this);
         int[] posOfNearestPray = {};
-        System.out.println("Finding pray");
+        ICreature nearestPray = null;
         for (int i = -mobility; i<mobility;i++)
         {
             for (int j = -mobility; j<mobility;j++)
@@ -65,19 +76,24 @@ public class Carnivore extends Creature implements ICarnivore {
                         if(posOfNearestPray.length != 2)
                         {
                             posOfNearestPray = positionToSearch;
+                            nearestPray = pray;
                         } else if (Math.pow(currentPos[0]-positionToSearch[0],2)+Math.pow(currentPos[1]-positionToSearch[1],2) < Math.pow(currentPos[0]-posOfNearestPray[0],2)+Math.pow(currentPos[1]-posOfNearestPray[1],2)) {
                             posOfNearestPray = positionToSearch;
+                            nearestPray = pray;
                         }
                     }
                 }
             }
         }
-        return posOfNearestPray;
+        return nearestPray;
     }
 
     @Override
-    public void EatPray(int[] pos) {
-
+    public void EatPray(ICreature pray) {
+        int[] prayPos = map.GetCreaturePos(pray);
+        pray.Die();
+        this.Move(prayPos);
+        lastMealTime = 0;
     }
     @Override
     public boolean IsSameType(ICreature creature) {

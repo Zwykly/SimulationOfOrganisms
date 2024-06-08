@@ -45,8 +45,8 @@ public abstract class Creature extends ACreature implements IRandomize {
     }
 
     @Override
-    public void Move(int[] pos) {
-
+    public boolean Move(int[] pos) {
+        return map.SettleCreature(this, pos);
     }
 
     @Override

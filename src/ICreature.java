@@ -6,7 +6,7 @@ public interface ICreature {
     public void Copulate(int[] pos);
     public void Die();
     public void Move();
-    public void Move(int[] pos);
+    public boolean Move(int[] pos);
     public IMap GetMap();
     public void SetMap(IMap map);
 }

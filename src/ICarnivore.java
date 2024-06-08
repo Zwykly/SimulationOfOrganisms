@@ -1,5 +1,5 @@
 public interface ICarnivore {
     public boolean IsNearPray();
-    public int[] NearestPrayPos();
-    public void EatPray(int[] pos);
+    public ICreature SearchForNearestPray();
+    public void EatPray(ICreature pray);
 }
