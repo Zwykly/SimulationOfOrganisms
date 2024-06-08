@@ -12,15 +12,15 @@ public class CreatureCreator implements ICreatureCreator
     protected int numHerbivores;
     public CreatureCreator()
     {
-        this.numCarnivores = 5;
+        this.numCarnivores = 1;
         this.carnivoreMobility = 5;
         this.carnivoreDeathTimer = 5;
         this.numOmnivores = 0;
-        this.numHerbivores = 0;
+        this.numHerbivores = 1;
         this.herbivoreMobility = 2;
         this.herbivoreDeathTimer = 5;
     }
-    public CreatureCreator(int numCarnivores,int carnivoreMobility,int carnivoreDeathTimer, int numOmnivores, int numHerbivores)
+    public CreatureCreator(int numCarnivores,int carnivoreMobility,int carnivoreDeathTimer, int numOmnivores, int numHerbivores, int herbivoreMobility, int herbivoreDeathTimer)
     {
         this.numCarnivores = numCarnivores;
         this.carnivoreMobility = carnivoreMobility;
@@ -38,6 +38,10 @@ public class CreatureCreator implements ICreatureCreator
         for(int i = 0; i<numCarnivores; i++)
         {
             creatureList.add(new Carnivore(map, carnivoreMobility, carnivoreDeathTimer));
+        }
+        for(int i = 0; i<numCarnivores; i++)
+        {
+            creatureList.add(new Herbivore(map, herbivoreMobility, herbivoreDeathTimer));
         }
         return creatureList;
     }
