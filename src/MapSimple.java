@@ -56,11 +56,13 @@ public class MapSimple implements IMap {
         for(int i = 0; i<size;i++)
         {
             for(int j = 0; j<size;j++) {
-                visibleMap[i][j] = ' ';
+                visibleMap[i][j] = '_';
             }
         }
         creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';} else if (k instanceof Herbivore) {
             visibleMap[v[0]][v[1]]='H';
+        } else {
+            visibleMap[v[0]][v[1]]='O';
         }
         });
         for(int i = 0; i<size;i++)

@@ -3,7 +3,8 @@ import java.util.Map;
 public interface ICreature {
     public void DecideAction();
     public boolean IsSameType(ICreature creature);
-    public void Copulate(int[] pos);
+    public ICreature NearestAlly();
+    public void Copulate(ICreature ally);
     public void Die();
     public void Move();
     public boolean Move(int[] pos);

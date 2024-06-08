@@ -7,28 +7,34 @@ public class CreatureCreator implements ICreatureCreator
     protected int carnivoreMobility;
     protected int carnivoreDeathTimer;
     protected int numOmnivores;
+    protected int omnivoreMobility;
+    protected int omnivoreDeathTimer;
+    protected int numHerbivores;
     protected int herbivoreMobility;
     protected int herbivoreDeathTimer;
-    protected int numHerbivores;
     public CreatureCreator()
     {
-        this.numCarnivores = 1;
+        this.numCarnivores = 3;
         this.carnivoreMobility = 5;
         this.carnivoreDeathTimer = 5;
-        this.numOmnivores = 0;
+        this.numOmnivores = 7;
+        this.omnivoreMobility = 2;
+        this.omnivoreDeathTimer = 5;
         this.numHerbivores = 1;
         this.herbivoreMobility = 2;
         this.herbivoreDeathTimer = 5;
     }
-    public CreatureCreator(int numCarnivores,int carnivoreMobility,int carnivoreDeathTimer, int numOmnivores, int numHerbivores, int herbivoreMobility, int herbivoreDeathTimer)
+    public CreatureCreator(int numCarnivores,int carnivoreMobility,int carnivoreDeathTimer, int numOmnivores,int omnivoreMobility,int omnivoreDeathTimer, int numHerbivores, int herbivoreMobility, int herbivoreDeathTimer)
     {
         this.numCarnivores = numCarnivores;
         this.carnivoreMobility = carnivoreMobility;
         this.carnivoreDeathTimer = carnivoreDeathTimer;
         this.numOmnivores = numOmnivores;
+        this.omnivoreMobility = omnivoreMobility;
+        this.omnivoreDeathTimer = omnivoreDeathTimer;
+        this.numHerbivores = numHerbivores;
         this.herbivoreMobility = herbivoreMobility;
         this.herbivoreDeathTimer = herbivoreDeathTimer;
-        this.numHerbivores = numHerbivores;
     }
 
     @Override
@@ -38,6 +44,10 @@ public class CreatureCreator implements ICreatureCreator
         for(int i = 0; i<numCarnivores; i++)
         {
             creatureList.add(new Carnivore(map, carnivoreMobility, carnivoreDeathTimer));
+        }
+        for(int i = 0; i<numOmnivores; i++)
+        {
+            creatureList.add(new Omnivore(map, omnivoreMobility, omnivoreDeathTimer));
         }
         for(int i = 0; i<numCarnivores; i++)
         {

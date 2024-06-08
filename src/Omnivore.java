@@ -1,5 +1,5 @@
-public class Carnivore extends Creature implements ICarnivore {
-    public Carnivore(IMap map, int mobility, int deathTimer)
+public class Omnivore extends Creature implements IHerbivore, ICarnivore{
+    public Omnivore(IMap map, int mobility, int deathTimer)
     {
         super(map, mobility, deathTimer);
     }
@@ -13,7 +13,6 @@ public class Carnivore extends Creature implements ICarnivore {
         }
         int rollRange = 10;
         ICreature nearestPray = SearchForNearestPray();
-        ICreature nearestAlly = NearestAlly();
         lastMealTime++;
         int roll = rnd.nextInt(rollRange);
         if (deathTimer-1==lastMealTime || deathTimer-2==lastMealTime)
@@ -29,9 +28,7 @@ public class Carnivore extends Creature implements ICarnivore {
         } else if (roll == 10) {
 
         }
-
     }
-
     @Override
     public ICreature SearchForNearestPray() {
         int[] currentPos = map.GetCreaturePos(this);
@@ -45,7 +42,7 @@ public class Carnivore extends Creature implements ICarnivore {
                 {
                     int[] positionToSearch = {currentPos[0]+i, currentPos[1]+j};
                     ICreature pray = map.GetCreatureByPos(positionToSearch);
-                    if(!(pray instanceof Carnivore) && pray != null)
+                    if(!(pray instanceof Omnivore) && pray != null)
                     {
                         if(posOfNearestPray.length != 2)
                         {
@@ -70,41 +67,32 @@ public class Carnivore extends Creature implements ICarnivore {
         lastMealTime = 0;
     }
     @Override
-    public boolean IsSameType(ICreature creature) {
+    public boolean IsNearFood() {
         return false;
-    }
-    @Override
-    public ICreature NearestAlly() {
-        int[] currentPos = map.GetCreaturePos(this);
-        int[] posOfNearestAlly = {};
-        ICreature nearestAlly = null;
-        for (int i = -mobility; i<mobility;i++)
-        {
-            for (int j = -mobility; j<mobility;j++)
-            {
-                if(i!=0 && j!=0)
-                {
-                    int[] positionToSearch = {currentPos[0]+i, currentPos[1]+j};
-                    ICreature ally = map.GetCreatureByPos(positionToSearch);
-                    if((ally instanceof Carnivore) && ally != null)
-                    {
-                        if(posOfNearestAlly.length != 2)
-                        {
-                            posOfNearestAlly = positionToSearch;
-                            nearestAlly = ally;
-                        } else if (Math.pow(currentPos[0]-positionToSearch[0],2)+Math.pow(currentPos[1]-positionToSearch[1],2) < Math.pow(currentPos[0]-posOfNearestAlly[0],2)+Math.pow(currentPos[1]-posOfNearestAlly[1],2)) {
-                            posOfNearestAlly = positionToSearch;
-                            nearestAlly = ally;
-                        }
-                    }
-                }
-            }
-        }
-        return nearestAlly;
     }
 
     @Override
-    public void Copulate(ICreature ally) {
-        return;
+    public int[] NearestFoodPos() {
+        return new int[2];
+    }
+
+    @Override
+    public void EatFood(int[] pos) {
+
+    }
+    @Override
+    public boolean IsSameType(ICreature creature) {
+        return false;
+    }
+
+    @Override
+    public ICreature NearestAlly() {
+        return null;
+    };
+
+    @Override
+    public void Copulate(ICreature ally)
+    {
+
     }
 }

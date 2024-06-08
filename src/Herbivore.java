@@ -37,12 +37,15 @@ public class Herbivore extends Creature implements IHerbivore{
     public boolean IsSameType(ICreature creature) {
         return false;
     }
-    public boolean IsNearAnotherOne() {
-        return false;
-    }
 
     @Override
-    public void Copulate(int[] pos) {
+    public ICreature NearestAlly() {
+        return null;
+    };
+
+    @Override
+    public void Copulate(ICreature ally)
+    {
 
     }
 }
