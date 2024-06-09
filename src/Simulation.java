@@ -52,7 +52,7 @@ public class Simulation {
         catch(Exception e){}
         do{
             time++;
-            creatureList.forEach(creature -> creature.DecideAction());
+            creatureList.forEach(creature -> {if(map.GetCreaturePos(creature)!=null){creature.DecideAction();}});
             System.out.flush();
             System.out.println("Time: "+time+"/"+timeLimit);
             map.PrintMap(map);
@@ -71,6 +71,7 @@ public class Simulation {
 
 
         Simulation sim = new Simulation(mapCreate, creatureCreate, objectCreator, 123, 5); //simulation run needs to be changed
+
 
         sim.runSimulation();
 

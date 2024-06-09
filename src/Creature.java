@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public abstract class Creature extends ACreature implements IRandomize
@@ -6,14 +8,20 @@ public abstract class Creature extends ACreature implements IRandomize
     protected static long seed = 0;
     protected int level;
     protected int lastMealTime;
+    protected int mobility;
+    protected int deathTimer;
+    protected Map<String, int[]>  nearestThings;
 
-    public Creature(IMap map)
+    public Creature(IMap map, int mobility, int deathTimer)
     {
         super(map);
         rnd = new Random(seed);
         this.seed++;
         this.level = 1;
         this.lastMealTime = 1;
+        this.mobility = mobility;
+        this.deathTimer = deathTimer;
+        this.nearestThings = new HashMap<>();
     }
     //Do dokonczenia funkcje
     @Override
@@ -23,13 +31,13 @@ public abstract class Creature extends ACreature implements IRandomize
         do
         {
 
-            checkPos[0] += rnd.nextInt(10)-5;
+            checkPos[0] += rnd.nextInt(mobility*2)-mobility;
             if(checkPos[0]<0)
             {checkPos[0] = 0;}
             else if(checkPos[0]> map.GetSize()-1)
             {checkPos[0] = map.GetSize()-1;}
 
-            checkPos[1] += rnd.nextInt(10)-5;
+            checkPos[1] += rnd.nextInt(mobility*2)-mobility;
             if(checkPos[1]<0)
             {checkPos[1] = 0;}
             else if(checkPos[1]> map.GetSize()-1)
@@ -39,15 +47,13 @@ public abstract class Creature extends ACreature implements IRandomize
     }
 
     @Override
-    public void Move(int[] pos)
-    {
-
+    public boolean Move(int[] pos) {
+        return map.SettleCreature(this, pos);
     }
 
     @Override
-    public void Die()
-    {
-
+    public void Die() {
+        map.KillCreature(this);
     }
 
     @Override

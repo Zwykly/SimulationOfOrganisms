@@ -33,7 +33,6 @@ public class MapSimple implements IMap {
 
     // Methods to be completed and add methods for Objects
     @Override
-    // Checks if you can put Object on given space
     public boolean SettleObject(IObject object, int[] pos) {
         if(objectsPositions.containsValue(pos))
         {
@@ -52,6 +51,16 @@ public class MapSimple implements IMap {
         object.SetMap(this);
         objectsPositions.remove(object,pos);
         }
+
+    public ICreature GetCreatureByPos(int[] pos) {
+        for(Map.Entry<ICreature, int[]> entry: creaturesPositions.entrySet())
+        {
+            if(Arrays.equals(entry.getValue(),pos))
+            {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     // Method to get position of a given Object
@@ -59,7 +68,7 @@ public class MapSimple implements IMap {
     public int[] GetObjectPos(IObject object) {
         return objectsPositions.get(object);
     }
-
+      
     // Prints out the map
     @Override
     public void PrintMap(IMap map)
@@ -68,16 +77,28 @@ public class MapSimple implements IMap {
         for(int i = 0; i<size;i++)
         {
             for(int j = 0; j<size;j++) {
-                visibleMap[i][j] = ' ';
+                visibleMap[i][j] = '_';
             }
         }
         creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';}});
         objectsPositions.forEach((k,v) -> {if(k instanceof Blankspace){visibleMap[v[0]][v[1]]='B';}});
         objectsPositions.forEach((k,v) -> {if(k instanceof OneUseFood){visibleMap[v[0]][v[1]]='F';}});
         objectsPositions.forEach((k,v) -> {if(k instanceof RenewableFood){visibleMap[v[0]][v[1]]='R';}});
+
+        creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';} else if (k instanceof Herbivore) {
+            visibleMap[v[0]][v[1]]='H';
+        } else {
+            visibleMap[v[0]][v[1]]='O';
+        }
+        });
         for(int i = 0; i<size;i++)
         {
             System.out.println(visibleMap[i]);
         }
+    }
+
+    @Override
+    public void KillCreature(ICreature creature) {
+        creaturesPositions.remove(creature);
     }
 }
