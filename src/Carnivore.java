@@ -26,8 +26,6 @@ public class Carnivore extends Creature implements ICarnivore {
             }
         } else if(roll<10) {
             Move();
-        } else if (roll == 10) {
-
         }
 
     }
@@ -68,6 +66,7 @@ public class Carnivore extends Creature implements ICarnivore {
         pray.Die();
         this.Move(prayPos);
         lastMealTime = 0;
+        level++;
     }
     @Override
     public boolean IsSameType(ICreature creature) {

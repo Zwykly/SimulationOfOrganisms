@@ -10,4 +10,8 @@ public class Blankspace extends AObject
     {
         return false;
     }
+    @Override
+    public boolean getRegenerationStatus(IObject object) {
+        return false;
+    }
 }

@@ -8,4 +8,8 @@ public class Food extends AObject
         map.DeleteObject(this, map.GetObjectPos(this));
         return true;
     }
+    @Override
+    public boolean getRegenerationStatus(IObject object) {
+        return false;
+    }
 }
