@@ -34,7 +34,14 @@ public class MapSimple implements IMap {
     }
 
     @Override
-    public IObject GetObject(int pos) {
+    public ICreature GetCreatureByPos(int[] pos) {
+        for(Map.Entry<ICreature, int[]> entry: creaturesPositions.entrySet())
+        {
+            if(Arrays.equals(entry.getValue(),pos))
+            {
+                return entry.getKey();
+            }
+        }
         return null;
     }
 
@@ -42,7 +49,6 @@ public class MapSimple implements IMap {
     public int[] GetObjectPos(IObject object) {
         return new int[0];
     }
-
     @Override
     public void PrintMap(IMap map)
     {
@@ -50,13 +56,23 @@ public class MapSimple implements IMap {
         for(int i = 0; i<size;i++)
         {
             for(int j = 0; j<size;j++) {
-                visibleMap[i][j] = ' ';
+                visibleMap[i][j] = '_';
             }
         }
-        creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';}});
+        creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';} else if (k instanceof Herbivore) {
+            visibleMap[v[0]][v[1]]='H';
+        } else {
+            visibleMap[v[0]][v[1]]='O';
+        }
+        });
         for(int i = 0; i<size;i++)
         {
             System.out.println(visibleMap[i]);
         }
+    }
+
+    @Override
+    public void KillCreature(ICreature creature) {
+        creaturesPositions.remove(creature);
     }
 }
