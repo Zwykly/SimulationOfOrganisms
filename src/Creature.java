@@ -27,7 +27,7 @@ public abstract class Creature extends ACreature implements IRandomize
     //Do dokonczenia funkcje
     @Override
     public void Move() {
-        int[] currentPos = map.GetCreaturePos(this);
+        int[] currentPos = map.GetCreaturePos(this).clone();
         int tries = 0;
         int[] checkPos;
         do {

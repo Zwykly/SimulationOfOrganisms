@@ -31,7 +31,7 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
     }
     @Override
     public ICreature SearchForNearestPray() {
-        int[] currentPos = map.GetCreaturePos(this);
+        int[] currentPos = map.GetCreaturePos(this).clone();
         int[] posOfNearestPray = {};
         ICreature nearestPray = null;
         for (int i = -mobility; i<mobility;i++)
@@ -61,7 +61,7 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
 
     @Override
     public void EatPray(ICreature pray) {
-        int[] prayPos = map.GetCreaturePos(pray);
+        int[] prayPos = map.GetCreaturePos(pray).clone();
         pray.Die();
         this.Move(prayPos);
         lastMealTime = 0;

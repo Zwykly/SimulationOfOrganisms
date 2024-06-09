@@ -32,7 +32,7 @@ public class Carnivore extends Creature implements ICarnivore {
 
     @Override
     public ICreature SearchForNearestPray() {
-        int[] currentPos = map.GetCreaturePos(this);
+        int[] currentPos = map.GetCreaturePos(this).clone();
         int[] posOfNearestPray = {};
         ICreature nearestPray = null;
         for (int i = -mobility; i<mobility;i++)
@@ -62,7 +62,7 @@ public class Carnivore extends Creature implements ICarnivore {
 
     @Override
     public void EatPray(ICreature pray) {
-        int[] prayPos = map.GetCreaturePos(pray);
+        int[] prayPos = map.GetCreaturePos(pray).clone();
         pray.Die();
         this.Move(prayPos);
         lastMealTime = 0;
@@ -74,7 +74,7 @@ public class Carnivore extends Creature implements ICarnivore {
     }
     @Override
     public ICreature NearestAlly() {
-        int[] currentPos = map.GetCreaturePos(this);
+        int[] currentPos = map.GetCreaturePos(this).clone();
         int[] posOfNearestAlly = {};
         ICreature nearestAlly = null;
         for (int i = -mobility; i<mobility;i++)
