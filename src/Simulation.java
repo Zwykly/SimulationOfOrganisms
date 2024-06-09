@@ -83,35 +83,105 @@ public class Simulation {
         int numRenewableFoods=0;
         Scanner s = new Scanner(System.in);
         do {
-            System.out.println("Podaj wielkość mapy:");
-            mapSize = s.nextInt();
+            do {
+                System.out.println("Podaj wielkość mapy:");
+                mapSize = s.nextInt();
+                if (mapSize < 0) {
+                    System.out.println("Niepoprawny rozmiar mapy");
+                }
+            }   while(mapSize <= 0);
+
             System.out.println("Podaj seed symulacji:");
             simSeed = s.nextInt();
-            System.out.println("Podaj długość symulacji:");
-            simTime = s.nextInt();
-            System.out.println("Podaj ilość roślinożerców:");
-            numHerbivores = s.nextInt();
-            System.out.println("Podaj ile pól mogą poruszać się roślinożercy:");
-            herbivoreMobility = s.nextInt();
-            System.out.println("Podaj jak długo mają żyć roślinożercy:");
-            herbivoreDeathTimer = s.nextInt();
-            System.out.println("Podaj ilość wszystkożerców:");
-            numOmnivores = s.nextInt();
-            System.out.println("Podaj ile pól mogą poruszać się wszystkożercy:");
-            omnivoreMobility = s.nextInt();
-            System.out.println("Podaj jak długo mają żyć wszystkożercy:");
-            omnivoreDeathTimer = s.nextInt();
-            System.out.println("Podaj ilość mięsożerców:");
-            numCarnivores = s.nextInt();
-            System.out.println("Podaj ile pól mogą poruszać się mięsożercy:");
-            carnivoreMobility = s.nextInt();
-            System.out.println("Podaj jak długo mają żyć mięsożercy:");
-            carnivoreDeathTimer = s.nextInt();
-            System.out.println("Podaj ilość pustych miejsc(na których nic nie może stać):");
-            numBlankspace = s.nextInt();
-            System.out.println("Podaj ilość odnawialnego jedzenia:");
-            numRenewableFoods = s.nextInt();
-            System.out.println("Podaj ilość jedzenia pojedyńczego użytku:");
+            do {
+                System.out.println("Podaj długość symulacji:");
+                simTime = s.nextInt();
+                if (simTime < 0) {
+                    System.out.println("Za malo czasu");
+                    break;
+                }
+            } while(simTime <= 0);
+
+            do
+            {
+                System.out.println("Podaj ilość roślinożerców:");
+                numHerbivores = s.nextInt();
+                if(numHerbivores < 0)
+                {
+                    System.out.println("Niepoprawna ilość roślinożerców");
+                }
+            } while(numHerbivores < 0);
+
+            if(numHerbivores > 0)
+            {
+                System.out.println("Podaj ile pól mogą poruszać się roślinożercy:");
+                herbivoreMobility = s.nextInt();
+                System.out.println("Podaj jak długo mają żyć roślinożercy:");
+                herbivoreDeathTimer = s.nextInt();
+            }
+
+            do {
+
+                System.out.println("Podaj ilość wszystkożerców:");
+                numOmnivores = s.nextInt();
+                if(numOmnivores < 0)
+                {
+                    System.out.println("Niepoprawna ilość wszystkożerców");
+                }
+            } while(numOmnivores < 0);
+
+            if(numOmnivores > 0) {
+                System.out.println("Podaj ile pól mogą poruszać się wszystkożercy:");
+                omnivoreMobility = s.nextInt();
+                System.out.println("Podaj jak długo mają żyć wszystkożercy:");
+                omnivoreDeathTimer = s.nextInt();
+            }
+
+            do {
+
+                System.out.println("Podaj ilość mięsożerców:");
+                numCarnivores = s.nextInt();
+                if(numCarnivores < 0)
+                {
+                    System.out.println("Niepoprawna ilość miesożerców");
+                }
+            } while(numCarnivores < 0);
+
+            if(numCarnivores > 0) {
+                System.out.println("Podaj ile pól mogą poruszać się miesożercy:");
+                carnivoreMobility = s.nextInt();
+                System.out.println("Podaj jak długo mają żyć miesożercy:");
+                carnivoreDeathTimer = s.nextInt();
+            }
+
+            do {
+                System.out.println("Podaj ilość pustych miejsc(na których nic nie może stać):");
+                numBlankspace = s.nextInt();
+                if(numBlankspace < 0) {
+                    System.out.println("Niepoprawna ilosc pustych miejsc");
+                }
+            }
+            while(numBlankspace < 0);
+
+
+            do {
+                System.out.println("Podaj ilość odnawialnego jedzenia:");
+                numRenewableFoods = s.nextInt();
+                if(numRenewableFoods < 0) {
+                    System.out.println("Niepoprawna ilosc odnawialnego jedzenia");
+                }
+            }
+            while(numRenewableFoods < 0);
+
+            do {
+                System.out.println("Podaj ilość edzenia pojedyńczego użytku:");
+                numSingleUseFoods = s.nextInt();
+                if(numSingleUseFoods < 0) {
+                    System.out.println("Niepoprawna ilosc jedzenia pojedyńczego użytku");
+                }
+            }
+            while(numSingleUseFoods < 0);
+
             numSingleUseFoods = s.nextInt();
         } while (mapSize==0 || simTime==0 || (mapSize*mapSize)<=numBlankspace+numRenewableFoods+numSingleUseFoods+numCarnivores+numHerbivores+numHerbivores);
         MapSimpleCreator mapCreate = new MapSimpleCreator(mapSize);
@@ -119,7 +189,7 @@ public class Simulation {
         ObjectCreator objectCreator = new ObjectCreator(numRenewableFoods, numSingleUseFoods, numBlankspace);
 
 
-        Simulation sim = new Simulation(mapCreate, creatureCreate, objectCreator, simSeed, 5); //simulation run needs to be changed
+        Simulation sim = new Simulation(mapCreate, creatureCreate, objectCreator, simSeed, simTime); //simulation run needs to be changed
 
 
         sim.runSimulation();
