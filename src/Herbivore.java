@@ -44,7 +44,7 @@ public class Herbivore extends Creature implements IHerbivore
                 {
                     int[] positionToSearch = {currentPos[0]+i, currentPos[1]+j};
                     IObject food = map.GetObjectByPos(positionToSearch);
-                    if(food != null)
+                    if(food != null && !(food instanceof Blankspace))
                     {
                         if(posofNearestFood.length != 2)
                         {

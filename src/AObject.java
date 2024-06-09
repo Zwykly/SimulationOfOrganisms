@@ -6,9 +6,4 @@ public abstract class AObject implements IObject{
     public void SetMap(IMap map) {
         this.map = map;
     }
-
-    @Override
-    public void ShowObjectType(IObject object) {
-
-    }
 }
