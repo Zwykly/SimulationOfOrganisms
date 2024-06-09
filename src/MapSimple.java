@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,11 +47,11 @@ public class MapSimple implements IMap {
     // Deleting objects (eating food)
     public void DeleteObject(IObject object, int[] pos)
     {
-        if(objectsPositions.containsValue(pos))
-        {
-        object.SetMap(this);
-        objectsPositions.remove(object,pos);
+        if (objectsPositions.containsValue(pos)) {
+            object.SetMap(this);
+            objectsPositions.remove(object, pos);
         }
+    }
 
     public ICreature GetCreatureByPos(int[] pos) {
         for(Map.Entry<ICreature, int[]> entry: creaturesPositions.entrySet())

@@ -30,7 +30,8 @@ public class Herbivore extends Creature implements IHerbivore{
     }
 
     @Override
-    public void EatFood(int[] pos) {
+    public void EatFood(int[] pos)
+    {
 
     }
     @Override
