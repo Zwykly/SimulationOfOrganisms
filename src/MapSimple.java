@@ -1,3 +1,4 @@
+import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +19,10 @@ public class MapSimple implements IMap {
     }
 
     @Override
-    public boolean SettleCreature(ICreature creature, int[] pos) {
-        if (GetCreatureByPos(pos)!=null) {
+    public boolean SettleCreature(ICreature creature, int[] pos)
+    {
+        if (GetCreatureByPos(pos) != null || GetObjectByPos(pos) != null)
+        {
             return false;
         }
         creaturesPositions.put(creature, pos);
@@ -32,10 +35,11 @@ public class MapSimple implements IMap {
         return creaturesPositions.get(creature);
     }
 
-    // Methods to be completed and add methods for Objects
+
     @Override
-    public boolean SettleObject(IObject object, int[] pos) {
-        if(objectsPositions.containsValue(pos))
+    public boolean SettleObject(IObject object, int[] pos)
+    {
+        if(GetCreatureByPos(pos) != null || GetObjectByPos(pos) != null)
         {
             return false;
         }

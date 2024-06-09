@@ -66,7 +66,7 @@ public class Simulation {
     public static void main(String[] args) {
         System.out.println("Main_Works"); //checking if main works
 
-        MapSimpleCreator mapCreate = new MapSimpleCreator(20);
+        MapSimpleCreator mapCreate = new MapSimpleCreator(4);
         CreatureCreator creatureCreate = new CreatureCreator();
         ObjectCreator objectCreator = new ObjectCreator();
 
