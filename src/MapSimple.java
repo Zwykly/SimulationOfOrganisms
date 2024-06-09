@@ -19,11 +19,11 @@ public class MapSimple implements IMap {
 
     @Override
     public boolean SettleCreature(ICreature creature, int[] pos) {
-        if (creaturesPositions.containsValue(pos)) {
+        if (GetCreatureByPos(pos)!=null) {
             return false;
         }
-        creature.SetMap(this);
         creaturesPositions.put(creature, pos);
+        creature.SetMap(this);
         return true;
     }
 
