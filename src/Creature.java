@@ -2,7 +2,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public abstract class Creature extends ACreature implements IRandomize {
+public abstract class Creature extends ACreature implements IRandomize
+{
     protected Random rnd;
     protected static long seed = 0;
     protected int level;
@@ -10,7 +11,6 @@ public abstract class Creature extends ACreature implements IRandomize {
     protected int mobility;
     protected int deathTimer;
     protected Map<String, int[]>  nearestThings;
-
 
     public Creature(IMap map, int mobility, int deathTimer)
     {
@@ -25,9 +25,11 @@ public abstract class Creature extends ACreature implements IRandomize {
     }
     //Do dokonczenia funkcje
     @Override
-    public void Move() {
+    public void Move()
+    {
         int[] checkPos = map.GetCreaturePos(this);
-        do {
+        do
+        {
 
             checkPos[0] += rnd.nextInt(mobility*2)-mobility;
             if(checkPos[0]<0)
@@ -57,7 +59,5 @@ public abstract class Creature extends ACreature implements IRandomize {
     @Override
     public long GetSeed() {return seed;}
     @Override
-    public void SetSeed(long seed) {
-        this.seed = seed;
-    }
+    public void SetSeed(long seed) { this.seed = seed; }
 }
