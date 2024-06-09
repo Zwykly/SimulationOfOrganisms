@@ -15,7 +15,7 @@ public class RenewableFood extends Food
     }
 
     @Override
-    public boolean getEaten(Food object)
+    public boolean getEaten(IObject object)
     {
         if(getRegenerationStatus(object))
         {

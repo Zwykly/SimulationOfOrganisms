@@ -7,4 +7,8 @@ public class Blankspace extends AObject
 
     public Blankspace (IMap map) { super(map); }
 
+    @Override
+    public boolean getEaten(IObject object) {
+        return false;
+    }
 }

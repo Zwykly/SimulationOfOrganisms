@@ -10,6 +10,7 @@ public class Simulation {
     private List<IObject> objectList;
 
     public int time = 1;
+
     private int timeLimit; //needs to be changed when user input is considered
 
 

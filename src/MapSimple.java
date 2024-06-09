@@ -44,6 +44,18 @@ public class MapSimple implements IMap {
         return true;
     }
 
+    @Override
+    public IObject GetObjectByPos(int[] pos) {
+        for(Map.Entry<IObject, int[]> entry: objectsPositions.entrySet())
+        {
+            if(Arrays.equals(entry.getValue(),pos))
+            {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
     // Deleting objects (eating food)
     public void DeleteObject(IObject object, int[] pos)
     {

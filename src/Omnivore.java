@@ -66,20 +66,17 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
         this.Move(prayPos);
         lastMealTime = 0;
     }
+
     @Override
-    public boolean IsNearFood() {
-        return false;
+    public void EatFood(IObject pos) {
+
     }
 
     @Override
-    public int[] NearestFoodPos() {
-        return new int[2];
+    public IObject SearchForNearestFood() {
+        return null;
     }
 
-    @Override
-    public void EatFood(int[] pos) {
-
-    }
     @Override
     public boolean IsSameType(ICreature creature) {
         return false;
