@@ -33,7 +33,7 @@ public class Herbivore extends Creature implements IHerbivore
 
     @Override
     public IObject SearchForNearestFood() {
-        int[] currentPos = map.GetCreaturePos(this);
+        int[] currentPos = map.GetCreaturePos(this).clone();
         int[] posofNearestFood = {};
         IObject nearestFood = null;
         for (int i = -mobility; i<mobility;i++)
@@ -44,7 +44,7 @@ public class Herbivore extends Creature implements IHerbivore
                 {
                     int[] positionToSearch = {currentPos[0]+i, currentPos[1]+j};
                     IObject food = map.GetObjectByPos(positionToSearch);
-                    if(food != null)
+                    if(food != null && !(food instanceof Blankspace))
                     {
                         if(posofNearestFood.length != 2)
                         {
@@ -64,10 +64,18 @@ public class Herbivore extends Creature implements IHerbivore
     @Override
     public void EatFood(IObject food)
     {
-        int[] foodPos = map.GetObjectPos(food);
+        int[] foodPos = map.GetObjectPos(food).clone();
         food.getEaten();
-        this.Move(foodPos);
+        if(food instanceof RenewableFood)
+        {
+            this.Move(foodPos);
+            this.Move();
+        } else {
+            this.Move(foodPos);
+            map.DeleteObject(food, foodPos);
+        }
         lastMealTime = 0;
+        level++;
     }
     @Override
     public boolean IsSameType(ICreature creature) {

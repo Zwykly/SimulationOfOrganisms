@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -25,25 +26,32 @@ public abstract class Creature extends ACreature implements IRandomize
     }
     //Do dokonczenia funkcje
     @Override
-    public void Move()
-    {
-        int[] checkPos = map.GetCreaturePos(this);
-        do
-        {
+    public void Move() {
+        int[] currentPos = map.GetCreaturePos(this).clone();
+        int tries = 0;
+        int[] checkPos;
+        do {
+            tries++;
+            if (tries >= mobility) {
+                return;
+            }
+            checkPos = currentPos.clone();
+            checkPos[0] += rnd.nextInt(mobility * 2) - mobility;
+            if (checkPos[0] < 0) {
+                checkPos[0] = 0;
+            } else if (checkPos[0] > map.GetSize() - 1) {
+                checkPos[0] = map.GetSize() - 1;
+            }
 
-            checkPos[0] += rnd.nextInt(mobility*2)-mobility;
-            if(checkPos[0]<0)
-            {checkPos[0] = 0;}
-            else if(checkPos[0]> map.GetSize()-1)
-            {checkPos[0] = map.GetSize()-1;}
-
-            checkPos[1] += rnd.nextInt(mobility*2)-mobility;
-            if(checkPos[1]<0)
-            {checkPos[1] = 0;}
-            else if(checkPos[1]> map.GetSize()-1)
-            {checkPos[1] = map.GetSize()-1;}
+            checkPos[1] += rnd.nextInt(mobility * 2) - mobility;
+            if (checkPos[1] < 0) {
+                checkPos[1] = 0;
+            } else if (checkPos[1] > map.GetSize() - 1) {
+                checkPos[1] = map.GetSize() - 1;
+            }
             System.out.println(checkPos[0] + " " + checkPos[1]);
-        } while (map.SettleCreature(this, checkPos));
+            System.out.print(Arrays.toString(map.GetCreaturePos(this)));
+        } while (!map.SettleCreature(this, checkPos));
     }
 
     @Override

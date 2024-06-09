@@ -54,6 +54,7 @@ public class Simulation {
         catch(Exception e){}
         do{
             time++;
+            objectList.forEach(object -> {if(object instanceof RenewableFood){object.getRegenerationStatus(object);}});
             creatureList.forEach(creature -> {if(map.GetCreaturePos(creature)!=null){creature.DecideAction();}});
             System.out.flush();
             System.out.println("Time: "+time+"/"+timeLimit);
@@ -101,7 +102,6 @@ public class Simulation {
                     break;
                 }
             } while(simTime <= 0);
-
             do
             {
                 System.out.println("Podaj ilość roślinożerców:");

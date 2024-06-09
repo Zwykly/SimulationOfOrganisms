@@ -1,7 +1,6 @@
 public interface IObject
 {
-    void SetMap(IMap map);
-    void ShowObjectType(IObject object);
-
-    boolean getEaten();
+    public void SetMap(IMap map);
+    public boolean getEaten();
+    public boolean getRegenerationStatus(IObject object);
 }
