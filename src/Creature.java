@@ -49,8 +49,6 @@ public abstract class Creature extends ACreature implements IRandomize
             } else if (checkPos[1] > map.GetSize() - 1) {
                 checkPos[1] = map.GetSize() - 1;
             }
-            System.out.println(checkPos[0] + " " + checkPos[1]);
-            System.out.print(Arrays.toString(map.GetCreaturePos(this)));
         } while (!map.SettleCreature(this, checkPos));
     }
 

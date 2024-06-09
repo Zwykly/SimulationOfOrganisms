@@ -83,6 +83,7 @@ public class Simulation {
         int numSingleUseFoods=0;
         int numRenewableFoods=0;
         Scanner s = new Scanner(System.in);
+
         do {
             do {
                 System.out.println("Podaj wielkość mapy:");
@@ -174,7 +175,7 @@ public class Simulation {
             while(numRenewableFoods < 0);
 
             do {
-                System.out.println("Podaj ilość edzenia pojedyńczego użytku:");
+                System.out.println("Podaj ilość jedzenia pojedyńczego użytku:");
                 numSingleUseFoods = s.nextInt();
                 if(numSingleUseFoods < 0) {
                     System.out.println("Niepoprawna ilosc jedzenia pojedyńczego użytku");
@@ -182,7 +183,6 @@ public class Simulation {
             }
             while(numSingleUseFoods < 0);
 
-            numSingleUseFoods = s.nextInt();
         } while (mapSize==0 || simTime==0 || (mapSize*mapSize)<=numBlankspace+numRenewableFoods+numSingleUseFoods+numCarnivores+numHerbivores+numHerbivores);
         MapSimpleCreator mapCreate = new MapSimpleCreator(mapSize);
         CreatureCreator creatureCreate = new CreatureCreator(numCarnivores,carnivoreMobility,carnivoreDeathTimer,numOmnivores,omnivoreMobility,omnivoreDeathTimer,numHerbivores,herbivoreMobility,herbivoreDeathTimer);
