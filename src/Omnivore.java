@@ -5,7 +5,8 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
     }
 
     @Override
-    public void DecideAction() {
+    public void DecideAction()
+    {
         if(deathTimer==lastMealTime)
         {
             Die();
@@ -30,7 +31,9 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
         }
     }
     @Override
-    public ICreature SearchForNearestPray() {
+    public ICreature SearchForNearestPray()
+    {
+
         int[] currentPos = map.GetCreaturePos(this).clone();
         int[] posOfNearestPray = {};
         ICreature nearestPray = null;
