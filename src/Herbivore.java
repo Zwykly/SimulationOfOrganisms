@@ -65,7 +65,7 @@ public class Herbivore extends Creature implements IHerbivore
     public void EatFood(IObject food)
     {
         int[] foodPos = map.GetObjectPos(food);
-        food.getEaten(food);
+        food.getEaten();
         this.Move(foodPos);
         lastMealTime = 0;
     }
