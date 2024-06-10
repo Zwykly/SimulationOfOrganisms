@@ -12,5 +12,5 @@ public interface IMap {
     public IObject GetObjectByPos(int[] pos);
     void DeleteObject(IObject object, int[] pos);
 
-    void PrintMap(IMap map);
+    String PrintMap(IMap map);
 }

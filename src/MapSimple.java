@@ -88,7 +88,7 @@ public class MapSimple implements IMap {
       
     // Prints out the map
     @Override
-    public void PrintMap(IMap map)
+    public String PrintMap(IMap map)
     {
         char[][] visibleMap = new char[size][size];
         for(int i = 0; i<size;i++)
@@ -120,10 +120,13 @@ public class MapSimple implements IMap {
             visibleMap[v[0]][v[1]]='O';
         }
         });
+        String shownMap = "";
         for(int i = 0; i<size;i++)
         {
-            System.out.println(visibleMap[i]);
+            String mapLine = new String(visibleMap[i].clone());
+            shownMap += mapLine+"\n";
         }
+        return shownMap;
     }
 
     @Override

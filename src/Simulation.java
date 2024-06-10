@@ -56,9 +56,7 @@ public class Simulation {
             creatureList.forEach(creature -> {if(map.GetCreaturePos(creature)!=null){creature.DecideAction();}});
             System.out.flush();
             System.out.println("Time: "+time+"/"+timeLimit);
-            System.out.println("Number of creatures: "+creatureList.size());
-            map.PrintMap(map);
-            System.out.println();
+            System.out.println(map.PrintMap(map));
         } while(time<timeLimit);
     }
 
