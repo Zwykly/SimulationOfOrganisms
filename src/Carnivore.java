@@ -21,10 +21,12 @@ public class Carnivore extends Creature implements ICarnivore {
             if(nearestPray!=null)
             {
                 EatPray(nearestPray);
+            } else if (deathTimer-1==lastMealTime && nearestAlly != null) {
+                EatPray(nearestAlly);
             } else {
                 Move();
             }
-        } else if(roll<10) {
+        } else {
             Move();
         }
 
@@ -69,10 +71,6 @@ public class Carnivore extends Creature implements ICarnivore {
         level++;
     }
     @Override
-    public boolean IsSameType(ICreature creature) {
-        return false;
-    }
-    @Override
     public ICreature NearestAlly() {
         int[] currentPos = map.GetCreaturePos(this).clone();
         int[] posOfNearestAlly = {};
@@ -85,7 +83,7 @@ public class Carnivore extends Creature implements ICarnivore {
                 {
                     int[] positionToSearch = {currentPos[0]+i, currentPos[1]+j};
                     ICreature ally = map.GetCreatureByPos(positionToSearch);
-                    if((ally instanceof Carnivore) && ally != null)
+                    if(ally instanceof Carnivore)
                     {
                         if(posOfNearestAlly.length != 2)
                         {
@@ -100,10 +98,5 @@ public class Carnivore extends Creature implements ICarnivore {
             }
         }
         return nearestAlly;
-    }
-
-    @Override
-    public void Copulate(ICreature ally) {
-        return;
     }
 }

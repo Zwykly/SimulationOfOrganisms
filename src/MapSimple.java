@@ -97,10 +97,22 @@ public class MapSimple implements IMap {
                 visibleMap[i][j] = '_';
             }
         }
-        creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';}});
-        objectsPositions.forEach((k,v) -> {if(k instanceof Blankspace){visibleMap[v[0]][v[1]]='B';}});
-        objectsPositions.forEach((k,v) -> {if(k instanceof OneUseFood){visibleMap[v[0]][v[1]]='F';}});
-        objectsPositions.forEach((k,v) -> {if(k instanceof RenewableFood){visibleMap[v[0]][v[1]]='R';}});
+        objectsPositions.forEach((k,v) -> {
+            if(k instanceof RenewableFood)
+            {
+                if(k.IsEdible())
+                {
+                    visibleMap[v[0]][v[1]]='R';
+                } else {
+                    visibleMap[v[0]][v[1]]='r';
+                }
+            } else if (k instanceof OneUseFood) {
+                visibleMap[v[0]][v[1]]='F';
+            }
+            else if (k instanceof Blankspace) {
+                visibleMap[v[0]][v[1]]='B';
+            }
+        });
 
         creaturesPositions.forEach((k,v) -> {if(k instanceof Carnivore){visibleMap[v[0]][v[1]]='C';} else if (k instanceof Herbivore) {
             visibleMap[v[0]][v[1]]='H';

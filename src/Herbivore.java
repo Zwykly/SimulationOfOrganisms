@@ -155,19 +155,10 @@ public class Herbivore extends Creature implements IHerbivore
         lastMealTime = 0;
         level++;
     }
-    @Override
-    public boolean IsSameType(ICreature creature) {
-        return false;
-    }
 
     @Override
     public ICreature NearestAlly() {
         return null;
     };
 
-    @Override
-    public void Copulate(ICreature ally)
-    {
-
-    }
 }
