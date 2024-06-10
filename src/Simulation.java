@@ -49,19 +49,16 @@ public class Simulation {
         System.out.flush();
         System.out.println("Time: "+time+"/"+timeLimit);
         map.PrintMap(map);
-        System.out.println("Press Enter to continue");
-        try{System.in.read();}
-        catch(Exception e){}
+        System.out.println();
         do{
             time++;
             objectList.forEach(object -> {if(object instanceof RenewableFood){object.getRegenerationStatus(object);}});
             creatureList.forEach(creature -> {if(map.GetCreaturePos(creature)!=null){creature.DecideAction();}});
             System.out.flush();
             System.out.println("Time: "+time+"/"+timeLimit);
+            System.out.println("Number of creatures: "+creatureList.size());
             map.PrintMap(map);
-            System.out.println("Press Enter to continue");
-            try{System.in.read();}
-            catch(Exception e){}
+            System.out.println();
         } while(time<timeLimit);
     }
 
