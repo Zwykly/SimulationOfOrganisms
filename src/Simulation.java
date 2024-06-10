@@ -1,4 +1,8 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -45,22 +49,25 @@ public class Simulation {
         }
     }
 
-    public void runSimulation() {
+    public void runSimulation(PrintWriter printWriter) {
         System.out.flush();
         System.out.println("Time: "+time+"/"+timeLimit);
-        map.PrintMap(map);
+        System.out.println(map.PrintMap(map));
+        printWriter.printf("Time: "+time+"/"+timeLimit+"\n");
+        printWriter.printf(map.PrintMap(map)+"\n");
         System.out.println();
         do{
             time++;
             objectList.forEach(object -> {if(object instanceof RenewableFood){object.getRegenerationStatus(object);}});
             creatureList.forEach(creature -> {if(map.GetCreaturePos(creature)!=null){creature.DecideAction();}});
-            System.out.flush();
             System.out.println("Time: "+time+"/"+timeLimit);
             System.out.println(map.PrintMap(map));
+            printWriter.printf("Time: "+time+"/"+timeLimit+"\n");
+            printWriter.printf(map.PrintMap(map)+"\n");
         } while(time<timeLimit);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Main_Works"); //checking if main works
         int mapSize = 0;
         int simSeed = 0;
@@ -77,6 +84,7 @@ public class Simulation {
         int numBlankspace = 0;
         int numSingleUseFoods=0;
         int numRenewableFoods=0;
+        String filename = "";
         Scanner s = new Scanner(System.in);
 
         do {
@@ -178,16 +186,28 @@ public class Simulation {
             }
             while(numSingleUseFoods < 0);
 
+            do {
+                System.out.println("Podaj nazwe pliku .txt do jakiego ma zostac zapisana symulacja:");
+                filename = s.nextLine();
+                if(Objects.equals(filename, "")) {
+                    System.out.println("Niepoprawna nazwa pliku.");
+                }
+            }
+            while(Objects.equals(filename, ""));
+
         } while (mapSize==0 || simTime==0 || (mapSize*mapSize)<=numBlankspace+numRenewableFoods+numSingleUseFoods+numCarnivores+numHerbivores+numHerbivores);
         MapSimpleCreator mapCreate = new MapSimpleCreator(mapSize);
         CreatureCreator creatureCreate = new CreatureCreator(numCarnivores,carnivoreMobility,carnivoreDeathTimer,numOmnivores,omnivoreMobility,omnivoreDeathTimer,numHerbivores,herbivoreMobility,herbivoreDeathTimer);
         ObjectCreator objectCreator = new ObjectCreator(numRenewableFoods, numSingleUseFoods, numBlankspace);
+        filename ="simResults/"+filename+".txt";
 
+        FileWriter fileWriter = new FileWriter(filename);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
 
         Simulation sim = new Simulation(mapCreate, creatureCreate, objectCreator, simSeed, simTime); //simulation run needs to be changed
 
 
-        sim.runSimulation();
-
+        sim.runSimulation(printWriter);
+        printWriter.close();
     }
 }
