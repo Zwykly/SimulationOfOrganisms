@@ -12,10 +12,8 @@ public class Herbivore extends Creature implements IHerbivore
             Die();
             return;
         }
-        int rollRange = 10;
         IObject nearestFood = SearchForNearestFood();
         lastMealTime++;
-        int roll = rnd.nextInt(rollRange);
         if (deathTimer-1==lastMealTime || deathTimer-2==lastMealTime)
         {
             if(nearestFood!=null)
@@ -24,10 +22,9 @@ public class Herbivore extends Creature implements IHerbivore
             } else {
                 Move();
             }
-        } else if(roll<10) {
+        } else
+        {
             Move();
-        } else if (roll == 10) {
-
         }
     }
 
@@ -46,14 +43,45 @@ public class Herbivore extends Creature implements IHerbivore
                     IObject food = map.GetObjectByPos(positionToSearch);
                     if(food != null && !(food instanceof Blankspace))
                     {
-                        if(posofNearestFood.length != 2)
+                        if(food instanceof OneUseFood)
                         {
-                            posofNearestFood = positionToSearch;
-                            nearestFood = food;
-                        } else if (Math.pow(currentPos[0]-positionToSearch[0],2)+Math.pow(currentPos[1]-positionToSearch[1],2) < Math.pow(currentPos[0]-posofNearestFood[0],2)+Math.pow(currentPos[1]-posofNearestFood[1],2)) {
-                            posofNearestFood = positionToSearch;
-                            nearestFood = food;
+                            if((posofNearestFood.length != 2)||(Math.pow(currentPos[0]-positionToSearch[0],2)+Math.pow(currentPos[1]-positionToSearch[1],2) < Math.pow(currentPos[0]-posofNearestFood[0],2)+Math.pow(currentPos[1]-posofNearestFood[1],2)))
+                            {
+                                posofNearestFood = positionToSearch;
+                                nearestFood = food;
+                            }
+                        } else if(food.IsEdible()) {
+                            if((posofNearestFood.length != 2)||(Math.pow(currentPos[0]-positionToSearch[0],2)+Math.pow(currentPos[1]-positionToSearch[1],2) < Math.pow(currentPos[0]-posofNearestFood[0],2)+Math.pow(currentPos[1]-posofNearestFood[1],2)))
+                            {
+                                int[] positionToLeft = positionToSearch.clone();
+                                if(positionToLeft[0]-1>0)
+                                {
+                                    positionToLeft[0]-=1;
+                                }
+                                int[] positionToRight = positionToSearch.clone();
+                                if(positionToRight[0]+1<map.GetSize())
+                                {
+                                    positionToRight[0]+=1;
+                                }
+                                int[] positionToBottom = positionToSearch.clone();
+                                if(positionToBottom[1]-1>0)
+                                {
+                                    positionToBottom[1]-=1;
+                                }
+                                int[] positionToTop = positionToSearch.clone();
+                                if(positionToTop[1]+1<map.GetSize())
+                                {
+                                    positionToTop[1]+=1;
+                                }
+                                if((map.GetCreatureByPos(positionToLeft)==null && map.GetObjectByPos(positionToLeft)==null)||(map.GetCreatureByPos(positionToRight)==null && map.GetObjectByPos(positionToRight)==null)||(map.GetCreatureByPos(positionToTop)==null && map.GetObjectByPos(positionToTop)==null)||(map.GetCreatureByPos(positionToBottom)==null && map.GetObjectByPos(positionToBottom)==null))
+                                {
+                                    posofNearestFood = positionToSearch;
+                                    nearestFood = food;
+                                }
+                            }
+
                         }
+
                     }
                 }
             }
@@ -66,13 +94,63 @@ public class Herbivore extends Creature implements IHerbivore
     {
         int[] foodPos = map.GetObjectPos(food).clone();
         food.getEaten();
-        if(food instanceof RenewableFood)
+        if(food instanceof OneUseFood)
         {
             this.Move(foodPos);
-            this.Move();
-        } else {
-            this.Move(foodPos);
             map.DeleteObject(food, foodPos);
+        } else {
+            if(foodPos[0]-1>0)
+            {
+                int[] possiblePos = foodPos.clone();
+                possiblePos[0]-=1;
+                if(map.GetCreatureByPos(possiblePos)==null&&map.GetObjectByPos(possiblePos)==null)
+                {
+                    this.Move(possiblePos);
+                    boolean ate = food.getEaten();
+                    lastMealTime = 0;
+                    level++;
+                    return;
+                }
+            }
+            if(foodPos[0]+1< map.GetSize())
+            {
+                int[] possiblePos = foodPos.clone();
+                possiblePos[0]+=1;
+                if(map.GetCreatureByPos(possiblePos)==null&&map.GetObjectByPos(possiblePos)==null)
+                {
+                    this.Move(possiblePos);
+                    boolean ate = food.getEaten();
+                    lastMealTime = 0;
+                    level++;
+                    return;
+                }
+            }
+            if(foodPos[1]-1>0)
+            {
+                int[] possiblePos = foodPos.clone();
+                possiblePos[1]-=1;
+                if(map.GetCreatureByPos(possiblePos)==null&&map.GetObjectByPos(possiblePos)==null)
+                {
+                    this.Move(possiblePos);
+                    boolean ate = food.getEaten();
+                    lastMealTime = 0;
+                    level++;
+                    return;
+                }
+            }
+            if(foodPos[1]-1< map.GetSize())
+            {
+                int[] possiblePos = foodPos.clone();
+                possiblePos[1]+=1;
+                if(map.GetCreatureByPos(possiblePos)==null&&map.GetObjectByPos(possiblePos)==null)
+                {
+                    this.Move(possiblePos);
+                    boolean ate = food.getEaten();
+                    lastMealTime = 0;
+                    level++;
+                    return;
+                }
+            }
         }
         lastMealTime = 0;
         level++;

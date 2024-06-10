@@ -1,8 +1,7 @@
 public class RenewableFood extends Food
 {
-    public int regen_time = 0;
-    public boolean isEdible = true;
-    public RenewableFood(IMap map) { super(map); }
+    public int regen_time;
+    public RenewableFood(IMap map) { super(map); this.regen_time=0;}
 
     // If regen_time is > 0 then the RenewableFood is still under regeneration
     @Override

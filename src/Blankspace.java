@@ -14,4 +14,9 @@ public class Blankspace extends AObject
     public boolean getRegenerationStatus(IObject object) {
         return false;
     }
+
+    @Override
+    public boolean IsEdible() {
+        return false;
+    }
 }
