@@ -3,6 +3,9 @@ import java.util.List;
 
 public class CreatureCreator implements ICreatureCreator
 {
+    /**
+     *
+     */
     protected int numCarnivores;
     protected int carnivoreMobility;
     protected int carnivoreDeathTimer;
@@ -24,6 +27,19 @@ public class CreatureCreator implements ICreatureCreator
         this.herbivoreMobility = 2;
         this.herbivoreDeathTimer = 5;
     }
+
+    /**
+     * Konstruktor który tworzy odpowiedni kreator organizmów.
+     * @param numCarnivores liczba mięsożerców
+     * @param carnivoreMobility mobilność mięsożerców
+     * @param carnivoreDeathTimer długość życia mięsożerców
+     * @param numOmnivores liczba wszystkożerców
+     * @param omnivoreMobility mobilność wszystkożerców
+     * @param omnivoreDeathTimer długość życia wszystkożerców
+     * @param numHerbivores liczba roślinożerców
+     * @param herbivoreMobility mobilność roślinożerców
+     * @param herbivoreDeathTimer długość życia roślinożerców
+     */
     public CreatureCreator(int numCarnivores,int carnivoreMobility,int carnivoreDeathTimer, int numOmnivores,int omnivoreMobility,int omnivoreDeathTimer, int numHerbivores, int herbivoreMobility, int herbivoreDeathTimer)
     {
         this.numCarnivores = numCarnivores;
@@ -37,6 +53,11 @@ public class CreatureCreator implements ICreatureCreator
         this.herbivoreDeathTimer = herbivoreDeathTimer;
     }
 
+    /**
+     * Metoda ta ma za zadanie utworzyć listę organizmów i przypisać im konkertną mapę oraz zmienne podane przez użytkownika.
+     * @param map mapa do które organizmy zostaną przypisane.
+     * @return creatureList - lista organizmów w symulacji.
+     */
     @Override
     public List<ICreature> CreateCreatures(IMap map)
     {

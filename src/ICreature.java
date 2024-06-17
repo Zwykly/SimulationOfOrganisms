@@ -1,6 +1,11 @@
 import java.util.Map;
-
+/**
+ * Interfejs który inicuje metody dla klasy abstarkcyjnej ACreature.
+ */
 public interface ICreature {
+    /**
+     *
+     */
     public void DecideAction();
     public ICreature NearestAlly();
     public void Die();

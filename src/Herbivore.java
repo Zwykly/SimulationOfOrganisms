@@ -1,10 +1,21 @@
+/**
+ * Klasa dla obiektu organizmu roślinożernego.
+ */
 public class Herbivore extends Creature implements IHerbivore
 {
+    /**
+     * Konstruktor tworzący obiekt organizmu roślinożernego.
+     * @param map aktualna mapa
+     * @param mobility zakres ruchu organizmu
+     * @param deathTimer długość życia organizmu
+     */
     public Herbivore(IMap map, int mobility, int deathTimer)
     {
         super(map, mobility, deathTimer);
     }
-
+    /**
+     * Metoda która decyduje o zachowaniu organizmu.
+     */
     @Override
     public void DecideAction() {
         if(deathTimer==lastMealTime)
@@ -28,6 +39,10 @@ public class Herbivore extends Creature implements IHerbivore
         }
     }
 
+    /**
+     * Metoda która poszukuje najbliższego jedzenia i zwaraca je w postaci IObject. Jeśli nie znajdzie jedzenia to zwraca ona null.
+     * @return nearestFood/null
+     */
     @Override
     public IObject SearchForNearestFood() {
         int[] currentPos = map.GetCreaturePos(this).clone();
@@ -89,6 +104,10 @@ public class Herbivore extends Creature implements IHerbivore
         return nearestFood;
     }
 
+    /**
+     * Metoda która pozwala na zjedzenie jedzenia, usunięcie obiektu jedzenia w przypadku jedzenia pojedyńczego użytku, zmiany statusu jedzenia wieloużytowego i przesunięcie organizmu na odpowiednie miejsce.
+     * @param food obiekt najbliższego jedzenia.
+     */
     @Override
     public void EatFood(IObject food)
     {
@@ -156,6 +175,10 @@ public class Herbivore extends Creature implements IHerbivore
         level++;
     }
 
+    /**
+     * Metoda zaimplementowana ze względu na jej istnienie w interfejsie.
+     * @return
+     */
     @Override
     public ICreature NearestAlly() {
         return null;

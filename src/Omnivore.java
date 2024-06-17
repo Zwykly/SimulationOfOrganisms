@@ -1,9 +1,20 @@
+/**
+ * Klasa dla obiektu organizmu wszystkożernego.
+ */
 public class Omnivore extends Creature implements IHerbivore, ICarnivore{
+    /**
+     * Konstruktor tworzący obiekt organizmu wszystkożernego.
+     * @param map
+     * @param mobility
+     * @param deathTimer
+     */
     public Omnivore(IMap map, int mobility, int deathTimer)
     {
         super(map, mobility, deathTimer);
     }
-
+    /**
+     * Metoda która decyduje o zachowaniu organizmu.
+     */
     @Override
     public void DecideAction()
     {
@@ -32,6 +43,10 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
             Move();
         }
     }
+    /**
+     * Metoda która poszukuje najbliższej ofiary i zwaraca ją w postaci ICreature. Jeśli nie znajdzie ofiary to zwraca ona null.
+     * @return nearestPray/null
+     */
     @Override
     public ICreature SearchForNearestPray()
     {
@@ -63,7 +78,10 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
         }
         return nearestPray;
     }
-
+    /**
+     * Metoda która odpowiada za zjedzenie ofiary(pray) przez organizm. Ofiara ta umiera, a ten organizm zajmuje jej miejsce na planszy.
+     * @param pray
+     */
     @Override
     public void EatPray(ICreature pray) {
         int[] prayPos = map.GetCreaturePos(pray).clone();
@@ -71,7 +89,10 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
         this.Move(prayPos);
         lastMealTime = 0;
     }
-
+    /**
+     * Metoda która pozwala na zjedzenie jedzenia, usunięcie obiektu jedzenia w przypadku jedzenia pojedyńczego użytku, zmiany statusu jedzenia wieloużytowego i przesunięcie organizmu na odpowiednie miejsce.
+     * @param food obiekt najbliższego jedzenia.
+     */
     @Override
     public void EatFood(IObject food)
     {
@@ -138,7 +159,10 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
         lastMealTime = 0;
         level++;
     }
-
+    /**
+     * Metoda która poszukuje najbliższego jedzenia i zwaraca je w postaci IObject. Jeśli nie znajdzie jedzenia to zwraca ona null.
+     * @return nearestFood/null
+     */
     @Override
     public IObject SearchForNearestFood() {
         int[] currentPos = map.GetCreaturePos(this).clone();
@@ -200,7 +224,10 @@ public class Omnivore extends Creature implements IHerbivore, ICarnivore{
         return nearestFood;
     }
 
-
+    /**
+     * Metoda która poszukuje najbliższego kompana i zwaraca go w postaci ICreature. Jeśli nie znajdzie kompana to zwraca ona null.
+     * @return nearestAlly/null
+     */
     @Override
     public ICreature NearestAlly() {
         int[] currentPos = map.GetCreaturePos(this).clone();

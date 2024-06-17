@@ -1,6 +1,9 @@
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Klasa dla  kreatora obiektów IObject.
+ */
 public class ObjectCreator implements IObjectCreator {
     protected int numRenewableFood;
     protected int numOneUseFood;
@@ -13,6 +16,12 @@ public class ObjectCreator implements IObjectCreator {
         this.numBlankSpace = 5;
     }
 
+    /**
+     * Konstruktor który tworzy obiekt kreatora z danymi podanym w arugmentach.
+     * @param numRenewableFood ilość odnawialnego jedzenia.
+     * @param numOneUseFood ilość pojedyńczego jedzenia.
+     * @param numBlankSpace Ilość pustych miejsc.
+     */
     public ObjectCreator (int numRenewableFood, int numOneUseFood, int numBlankSpace)
     {
         this.numRenewableFood = numRenewableFood;
@@ -20,6 +29,11 @@ public class ObjectCreator implements IObjectCreator {
         this.numBlankSpace = numBlankSpace;
     }
 
+    /**
+     * Metoda ta ma za zadanie utworzyć listę obiektów, zapełnienić ją konkretnymi obiektami oraz ją zwrócić.
+     * @param map mapa do której są przypisywane obiekty.
+     * @return Lista obiektów.
+     */
     @Override
     public List<IObject> CreateObjects(IMap map)
     {

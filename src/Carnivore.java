@@ -1,9 +1,21 @@
+/**
+ * Klasa dla obiektu organizmu mięsożernego
+ */
 public class Carnivore extends Creature implements ICarnivore {
+    /**
+     * Konstruktor tworzący obiekt organizmu mięsożernego.
+     * @param map aktualna mapa
+     * @param mobility zakres ruchu organizmu
+     * @param deathTimer długość życia organizmu
+     */
     public Carnivore(IMap map, int mobility, int deathTimer)
     {
         super(map, mobility, deathTimer);
     }
 
+    /**
+     * Metoda która decyduje o zachowaniu organizmu.
+     */
     @Override
     public void DecideAction() {
         if(deathTimer==lastMealTime)
@@ -11,11 +23,9 @@ public class Carnivore extends Creature implements ICarnivore {
             Die();
             return;
         }
-        int rollRange = 10;
         ICreature nearestPray = SearchForNearestPray();
         ICreature nearestAlly = NearestAlly();
         lastMealTime++;
-        int roll = rnd.nextInt(rollRange);
         if (deathTimer-1==lastMealTime || deathTimer-2==lastMealTime)
         {
             if(nearestPray!=null)
@@ -32,6 +42,10 @@ public class Carnivore extends Creature implements ICarnivore {
 
     }
 
+    /**
+     * Metoda która poszukuje najbliższej ofiary i zwaraca ją w postaci ICreature. Jeśli nie znajdzie ofiary to zwraca ona null.
+     * @return nearestPray/null
+     */
     @Override
     public ICreature SearchForNearestPray() {
         int[] currentPos = map.GetCreaturePos(this).clone();
@@ -62,6 +76,10 @@ public class Carnivore extends Creature implements ICarnivore {
         return nearestPray;
     }
 
+    /**
+     * Metoda która odpowiada za zjedzenie ofiary(pray) przez organizm. Ofiara ta umiera, a ten organizm zajmuje jej miejsce na planszy.
+     * @param pray
+     */
     @Override
     public void EatPray(ICreature pray) {
         int[] prayPos = map.GetCreaturePos(pray).clone();
@@ -70,6 +88,10 @@ public class Carnivore extends Creature implements ICarnivore {
         lastMealTime = 0;
         level++;
     }
+    /**
+     * Metoda która poszukuje najbliższego kompana i zwaraca go w postaci ICreature. Jeśli nie znajdzie kompana to zwraca ona null.
+     * @return nearestAlly/null
+     */
     @Override
     public ICreature NearestAlly() {
         int[] currentPos = map.GetCreaturePos(this).clone();

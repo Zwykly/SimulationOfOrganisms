@@ -1,6 +1,8 @@
+/**
+ * Interfejs który inicuje metody dla klasy MapSimple.
+ */
 public interface IMap {
     public int GetSize();
-
     public boolean SettleCreature(ICreature creature, int[] pos);
     public int[] GetCreaturePos(ICreature creature);
     public ICreature GetCreatureByPos(int[] pos);

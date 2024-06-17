@@ -3,6 +3,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Klasa orgaznimu z której następnie dziedziczą inne organizmy.
+ */
 public abstract class Creature extends ACreature implements IRandomize
 {
     protected Random rnd;
@@ -13,6 +16,12 @@ public abstract class Creature extends ACreature implements IRandomize
     protected int deathTimer;
     protected Map<String, int[]>  nearestThings;
 
+    /**
+     * Konstruktor obiektu organizmu.
+     * @param map mapa do której przypisany jest organizm.
+     * @param mobility zakres ruchu organizmu.
+     * @param deathTimer długość życia ogranizmu
+     */
     public Creature(IMap map, int mobility, int deathTimer)
     {
         super(map);
@@ -24,7 +33,10 @@ public abstract class Creature extends ACreature implements IRandomize
         this.deathTimer = deathTimer;
         this.nearestThings = new HashMap<>();
     }
-    //Do dokonczenia funkcje
+
+    /**
+     * Metoda ta losuje miejsce w zakresie od -mobility do mobility, i postawia tam organizm.
+     */
     @Override
     public void Move() {
         int[] currentPos = map.GetCreaturePos(this).clone();
@@ -52,18 +64,35 @@ public abstract class Creature extends ACreature implements IRandomize
         } while (!map.SettleCreature(this, checkPos));
     }
 
+    /**
+     * Metoda która porusza organizm na dane miejsce.
+     * @param pos miejsce na które ma się poruszyć organizm
+     * @return boolean - informujacy czy dane miejsce jest wolne.
+     */
     @Override
     public boolean Move(int[] pos) {
         return map.SettleCreature(this, pos);
     }
 
+    /**
+     * Metoda która usuwa organizm z HashMapy organizmów i ich pozycji.
+     */
     @Override
     public void Die() {
         map.KillCreature(this);
     }
 
+    /**
+     * Getter który zwraca seed zapisany w organizmie.
+     * @return seed - zmienna od której zależy zachowanie organizmu.
+     */
     @Override
     public long GetSeed() {return seed;}
+
+    /**
+     * Setter który nadpisuje seed zapisany w organizmie.
+     * @param seed
+     */
     @Override
     public void SetSeed(long seed) { this.seed = seed; }
 }

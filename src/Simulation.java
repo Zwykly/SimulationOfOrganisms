@@ -7,18 +7,22 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Simulation {
-
-    private IMap map;
+    private IMap map; //Przechowuj obiekt mapy
     static private Random rnd;
 
     private List<ICreature> creatureList;
     private List<IObject> objectList;
-
     public int time = 1;
+    private int timeLimit;
 
-    private int timeLimit; //needs to be changed when user input is considered
-
-
+    /**
+     * Konstruktor odpowiada z utworzenie obiektu symulacji oraz odpowiednie rozmieszczenie obiektów i orgarnizmów na mapie.
+     * @param mapCreator Obiekt tworzący mapę.
+     * @param creatureCreator Obiekt tworzący organizmy.
+     * @param objectCreator Obiekt tworzący obiekty.
+     * @param seed Seed od którego zależy rozmieszczenie obiektów i organizmów na mapie.
+     * @param timeLimit Ogranicznie czasowe symulacji.
+     */
     public Simulation(IMapCreator mapCreator, ICreatureCreator creatureCreator, IObjectCreator objectCreator, long seed, int timeLimit) {
         this.timeLimit = timeLimit;
         this.map = mapCreator.CreateMap();
@@ -49,6 +53,10 @@ public class Simulation {
         }
     }
 
+    /**
+     * Metoda ta odpowiada za wydruk oraz zapis stanu mapy i odpowiednie zarządzanie kolejnością działań obiektów/organizmów.
+     * @param printWriter Obiekt pozwalajacy na zapis stanu symulacji do pliku.
+     */
     public void runSimulation(PrintWriter printWriter) {
         System.out.flush();
         System.out.println("Time: "+time+"/"+timeLimit);
@@ -67,6 +75,11 @@ public class Simulation {
         } while(time<timeLimit);
     }
 
+    /**
+     * Główna metoda odpowiadająca za działanie symulacji, przyjęcie warunków początkowych od użytkownika oraz odpowiednie utworzenie obiektów przy pomocy konstruktorów.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         System.out.println("Main_Works"); //checking if main works
         int mapSize = 0;
